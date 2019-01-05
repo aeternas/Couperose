@@ -5,6 +5,7 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [
                  [org.clojure/clojure "1.9.0"],
+                 [clj-http "3.9.1"],
                  [org.clojure/data.json "0.2.6"]
                 ]
   :main ^:skip-aot couperose.core
