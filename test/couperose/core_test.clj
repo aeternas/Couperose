@@ -8,11 +8,12 @@
   (testing "language constructor"
     (def tatarLang (dtos/make-language "Tatar" "tt"))
     (is (= (:fullName tatarLang) "Tatar")))
-  (testing "parsing from json string"
-    (def jsonString "{\"fullName\":\"Tatar\", \"code\":\"tt\"}")
-    (def tatarLangJson (json/read-str jsonString
-                                      :key-fn keyword))
-    (def tatarLangObj (dtos/make-language (:fullName tatarLangJson) (:code tatarLangJson)))
-    (is (= (:fullName tatarLangObj) "Tatar"))
-    (is (= (:code tatarLangObj) "tt"))))
 
+  (testing "parsing from json string"
+    (def expectedTatarLang (dtos/make-language "Tatar" "tt"))
+    (defn tatarLang
+      []
+      (def tatarLangJson (json/read-str "{\"fullName\":\"Tatar\", \"code\":\"tt\"}"
+                                      :key-fn keyword))
+      (dtos/make-language (:fullName tatarLangJson) (:code tatarLangJson)))
+    (is (= (tatarLang) expectedTatarLang))))
