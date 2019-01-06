@@ -9,8 +9,5 @@
   []
   (client/get url
             {:async? true}
-            ;; respond callback
-            ;; (fn [response] (println "response is:" (get response :body)))
             (fn [response] (json/read-str (get response :body)))
-            ;; raise callback
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
