@@ -10,12 +10,4 @@
   (def jsonString "{\"fullName\":\"Tatar\", \"code\":\"tt\"}")
   (testing "parsing with parser"
     (def parsedLanguage (languageParser/parseLanguage jsonString))
-    (is (= parsedLanguage expectedTatarLang)))
-
-  (testing "parsing from json string"
-    (defn tatarLang
-      []
-      (def tatarLangJson (json/read-str jsonString
-                                        :key-fn keyword))
-      (dtos/make-language (:fullName tatarLangJson) (:code tatarLangJson)))
-    (is (= (tatarLang) expectedTatarLang))))
+    (is (= parsedLanguage expectedTatarLang))))
