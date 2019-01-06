@@ -1,4 +1,4 @@
-(ns couperose.core
+(ns couperose.services.retriever
   (:require [clj-http.client :as client]))
 
 (def hostname (System/getenv "HOSTNAME"))
