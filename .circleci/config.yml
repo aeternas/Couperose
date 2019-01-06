@@ -26,3 +26,5 @@ jobs:
         
       - run: lein test
       - run: lein uberjar 
+      - store_artifacts:
+          path: target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar
