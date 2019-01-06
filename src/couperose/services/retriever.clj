@@ -1,5 +1,6 @@
 (ns couperose.services.retriever
-  (:require [clj-http.client :as client]))
+  (:require [clojure.data.json :as json]
+            [clj-http.client :as client]))
 
 (def hostname (System/getenv "HOSTNAME"))
 (def url (str "https://" hostname "/v1/groups")) 
@@ -9,6 +10,7 @@
   (client/get url
             {:async? true}
             ;; respond callback
-            (fn [response] (println "response is:" (get response :body)))
+            ;; (fn [response] (println "response is:" (get response :body)))
+            (fn [response] (json/read-str (get response :body)))
             ;; raise callback
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
