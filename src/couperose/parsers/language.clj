@@ -7,6 +7,3 @@
   (def jsonObject (json/read-str data
                                  :key-fn keyword))
   (dtos/make-language (:fullName jsonObject) (:code jsonObject)))
-
-
-
