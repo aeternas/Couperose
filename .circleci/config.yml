@@ -2,9 +2,9 @@ aliases:
   - &containerize_push
     name: Containerize and Push
     command: |
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose-master . && \
-      docker push aeternas/swadeshness-couperose-master
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+      docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose:$CIRCLE_BRANCH . && \
+      docker push aeternas/swadeshness-couperose:$CIRCLE_BRANCH
 
 version: 2
 jobs:
