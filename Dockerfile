@@ -1,4 +1,4 @@
 FROM openjdk:11
-COPY . /home/circleci/repo/target/uberjar/
-WORKDIR /home/circleci/repo/target/uberjar/
+WORKDIR ~
+COPY /home/circleci/repo/target/uberjar/target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar .
 CMD ["java", "-jar", "couperose-0.1.0-SNAPSHOT-standalone.jar"]
