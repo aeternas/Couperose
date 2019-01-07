@@ -2,6 +2,8 @@ aliases:
   - &containerize_push
     name: Containerize and Push
     command: |
+      ls
+      pwd
       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       docker build -t aeternas/swadeshness-couperose-master . && \
       docker push aeternas/swadeshness-couperose-master
