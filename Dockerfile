@@ -1,4 +1,6 @@
-FROM openjdk:latest
-COPY . /home/circleci/repo/target/uberjar/
-WORKDIR /home/circleci/repo/target/uberjar/
+FROM openjdk:12-alpine
+ARG SW_HOSTNAME
+ENV HOSTNAME $SW_HOSTNAME
+WORKDIR /home/circleci/repo/
+COPY target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar .
 CMD ["java", "-jar", "couperose-0.1.0-SNAPSHOT-standalone.jar"]
