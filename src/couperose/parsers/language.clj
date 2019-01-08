@@ -21,12 +21,16 @@
   (def json (getJson data))
   (into [] (map makeLanguage json)))
 
-(defn parseLanguageGroup
-  [data]
-  (def json (getJson data))
+(defn makeLanguageGroup
+  [json]
   (dtos/make-language-group
     (:name json)
     (into [] (map makeLanguage (:languages json)))))
+
+(defn parseLanguageGroup
+  [data]
+  (def json (getJson data))
+  (makeLanguageGroup json))
 
 (defn parseLanguageGroupArray
   [data]
