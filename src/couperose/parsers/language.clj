@@ -11,32 +11,24 @@
   [json]
   (dtos/make-language (:fullName json) (:code json)))
 
-(defn parseLanguage
-  [data]
-  (def json (getJson data))
-  (makeLanguage json))
-
-(defn parseLanguageArray
-  [data]
-  (def json (getJson data))
-  (into [] (map makeLanguage json)))
-
 (defn makeLanguageGroup
   [json]
   (dtos/make-language-group
     (:name json)
     (into [] (map makeLanguage (:languages json)))))
 
+(defn parseLanguage
+  [data]
+  (makeLanguage (getJson data)))
+
+(defn parseLanguageArray
+  [data]
+  (into [] (map makeLanguage (getJson data))))
+
 (defn parseLanguageGroup
   [data]
-  (def json (getJson data))
-  (makeLanguageGroup json))
+  (makeLanguageGroup (getJson data)))
 
 (defn parseLanguageGroupArray
   [data]
-  (def json (getJson data))
-  (defn makeLanguageGroup
-    [languageGroupDict]
-    (dtos/make-language-group (:name languageGroupDict) (into [] (map #(dtos/make-language (:fullName %) (:code %)) (:languages languageGroupDict)))))
-
-  (into [] (map makeLanguageGroup json)))
+  (into [] (map makeLanguageGroup (getJson data))))
