@@ -7,16 +7,19 @@
   (json/read-str data
                  :key-fn keyword))
 
+(defn makeLanguage
+  [json]
+  (dtos/make-language (:fullName json) (:code json)))
+
 (defn parseLanguage
   [data]
   (def json (getJson data))
-  (dtos/make-language (:fullName json) (:code json)))
+  (makeLanguage json))
 
 (defn parseLanguageArray
   [data]
   (def json (getJson data))
-  (into [] (map
-             #(dtos/make-language (:fullName %) (:code %)) json)))
+  (into [] (map makeLanguage json)))
 
 (defn parseLanguageGroup
   [data]
