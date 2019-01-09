@@ -2,31 +2,33 @@
   (:require [clojure.data.json :as json]
             [couperose.dto.dtos :as dtos]))
 
+(defn getJson
+  [data]
+  (json/read-str data
+                 :key-fn keyword))
+
+(defn makeLanguage
+  [json]
+  (dtos/make-language (:fullName json) (:code json)))
+
+(defn makeLanguageGroup
+  [json]
+  (dtos/make-language-group
+    (:name json)
+    (into [] (map makeLanguage (:languages json)))))
+
 (defn parseLanguage
   [data]
-  (def jsonObject (json/read-str data
-                                 :key-fn keyword))
-  (dtos/make-language (:fullName jsonObject) (:code jsonObject)))
+  (makeLanguage (getJson data)))
 
 (defn parseLanguageArray
   [data]
-  (def jsonObject (json/read-str data
-                                 :key-fn keyword))
-  (into [] (map #(dtos/make-language (:fullName %) (:code %)) jsonObject)))
+  (into [] (map makeLanguage (getJson data))))
 
 (defn parseLanguageGroup
   [data]
-  (def jsonObject (json/read-str data
-                                 :key-fn keyword))
-  (def languageGroupDict {:name (:name jsonObject) :languages (:languages jsonObject)})
-  (dtos/make-language-group (:name languageGroupDict) (into [] (map #(dtos/make-language (:fullName %) (:code %)) (:languages languageGroupDict)))))
+  (makeLanguageGroup (getJson data)))
 
 (defn parseLanguageGroupArray
   [data]
-  (def jsonObject (json/read-str data
-                                 :key-fn keyword))
-  (defn makeLanguageGroup
-    [languageGroupDict]
-    (dtos/make-language-group (:name languageGroupDict) (into [] (map #(dtos/make-language (:fullName %) (:code %)) (:languages languageGroupDict)))))
-
-  (into [] (map makeLanguageGroup jsonObject)))
+  (into [] (map makeLanguageGroup (getJson data))))
