@@ -6,11 +6,11 @@
 
 (def hostname (System/getenv "HOSTNAME"))
 (def groupsUrl (str "https://" hostname "/v1/groups"))
-(def translationUrl (str "https://" hostname "/v1/"))
+(def baseUrl (str "https://" hostname "/v1/"))
 
 (defn sendRequests
   [phrases languageGroups]
-  (println (map (fn [phrase] (client/get (str translationUrl (translationParser/getQuery phrase languageGroups))))
+  (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))))
                 phrases)))
 
 (defn retrieveGroups
@@ -18,5 +18,5 @@
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests ["Hello" "Mother" "Father" "Hello, world!" "Cat" "Dog"] languagesArray)))
+                                                              (sendRequests ["Hello" "Mother" "Father" "Hello, world!" "Cat" "Dog" "Nature" "Language" "I" "How are you"] languagesArray)))
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
