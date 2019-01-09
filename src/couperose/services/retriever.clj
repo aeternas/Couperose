@@ -1,6 +1,7 @@
 (ns couperose.services.retriever
   (:require [clojure.data.json :as json]
-            [clj-http.client :as client]))
+            [clj-http.client :as client]
+            [couperose.parsers.language :as languageParser]))
 
 (def hostname (System/getenv "HOSTNAME"))
 (def url (str "https://" hostname "/v1/groups")) 
@@ -9,5 +10,6 @@
   []
   (client/get url
             {:async? true}
-            (fn [response] (json/read-str (get response :body)))
+            (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
+                                                              (println languagesArray)))
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
