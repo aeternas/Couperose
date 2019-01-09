@@ -1,6 +1,6 @@
 # couperose
 
-Cache warming solution
+Cache warming solution for [SwadeshNess](https://github.com/aeternas/SwadeshNess) project
 
 ## Usage
 
