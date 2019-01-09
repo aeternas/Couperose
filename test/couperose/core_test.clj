@@ -40,4 +40,8 @@
     (is (= "&group=Turkic" (translationParser/getLanguageGroupsQuery singleLanguageGroup))))
 
   (testing "creating language group query from two lang groups"
-    (is (= "&group=Turkic&group=Baltic" (translationParser/getLanguageGroupsQuery twoLanguageGroups)))))
+    (is (= "&group=Turkic&group=Baltic" (translationParser/getLanguageGroupsQuery twoLanguageGroups))))
+
+  (testing "create full request query"
+    (let [someLongPhrase "Do you remember love"]
+      (is (= "?translation=Do you remember love&group=Turkic&group=Baltic" (translationParser/getQuery someLongPhrase twoLanguageGroups))))))
