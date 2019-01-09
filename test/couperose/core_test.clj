@@ -3,6 +3,7 @@
             [clojure.data.json :as json]
             [couperose.core :refer :all]
             [couperose.parsers.language :as languageParser]
+            [couperose.parsers.translation :as translationParser]
             [couperose.dto.dtos :as dtos]))
 
 (deftest LanguageParsingTest
@@ -31,3 +32,12 @@
   (testing "parse language group array"
     (def parsedLanguageGroupArray (languageParser/parseLanguageGroupArray languageGroupArrayJsonString))
     (is (= "Lietuvan" (:fullName((:languages (parsedLanguageGroupArray 0)) 1))))))
+
+(deftest TranslationTest
+  (def singleLanguageGroup [(dtos/make-language-group "Turkic" [(dtos/make-language "Tatar" "tt") (dtos/make-language "Turkic" "tr")])])
+  (def twoLanguageGroups [(dtos/make-language-group "Turkic" [(dtos/make-language "Tatar" "tt") (dtos/make-language "Turkish" "tr")]) (dtos/make-language-group "Baltic" [(dtos/make-language "Latvian" "lv") (dtos/make-language "Lietuvan" "lt")])])
+  (testing "creating language group query from single lang groups"
+    (is (= "&group=Turkic" (translationParser/getLanguageGroupsQuery singleLanguageGroup))))
+
+  (testing "creating language group query from two lang groups"
+    (is (= "&group=Turkic&group=Baltic" (translationParser/getLanguageGroupsQuery twoLanguageGroups)))))
