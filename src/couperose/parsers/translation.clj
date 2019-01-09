@@ -9,4 +9,4 @@
 (defn getQuery
   [phrases languageGroups]
   (let [languageGroupsQuery (getLanguageGroupsQuery languageGroups)]
-    (str "?translation=" phrases languageGroupsQuery)))
+    (str "?translate=" phrases languageGroupsQuery)))
