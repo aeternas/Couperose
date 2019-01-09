@@ -6,7 +6,7 @@
 (def hostname (System/getenv "HOSTNAME"))
 (def url (str "https://" hostname "/v1/groups")) 
 
-(defn retrieve
+(defn retrieveGroups
   []
   (client/get url
             {:async? true}

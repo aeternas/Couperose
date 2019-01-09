@@ -4,4 +4,4 @@
 
 (defn -main
   [& args]
-  (retriever/retrieve))
+  (retriever/retrieveGroups))
