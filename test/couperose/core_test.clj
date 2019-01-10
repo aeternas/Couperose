@@ -33,7 +33,7 @@
     (def parsedLanguageGroupArray (languageParser/parseLanguageGroupArray languageGroupArrayJsonString))
     (is (= "Lietuvan" (:fullName((:languages (parsedLanguageGroupArray 0)) 1))))))
 
-(deftest TranslationTest
+(deftest TranslationQueryBuildingTest
   (def singleLanguageGroup [(dtos/make-language-group "Turkic" [(dtos/make-language "Tatar" "tt") (dtos/make-language "Turkic" "tr")])])
   (def twoLanguageGroups [(dtos/make-language-group "Turkic" [(dtos/make-language "Tatar" "tt") (dtos/make-language "Turkish" "tr")]) (dtos/make-language-group "Baltic" [(dtos/make-language "Latvian" "lv") (dtos/make-language "Lietuvan" "lt")])])
   (testing "creating language group query from single lang groups"
