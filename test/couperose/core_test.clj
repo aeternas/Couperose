@@ -4,7 +4,9 @@
             [couperose.core :refer :all]
             [couperose.parsers.language :as languageParser]
             [couperose.parsers.translation :as translationParser]
-            [couperose.dto.dtos :as dtos]))
+            [couperose.dto.dtos :as dtos]
+            [clj-http.client :as c])
+  (:use clj-http.fake))
 
 (deftest LanguageParsingTest
   (def expectedTatarLang (dtos/make-language "Tatar" "tt"))
