@@ -18,5 +18,5 @@
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests ["Hello" "Mother" "Father" "Hello, world!" "Cat" "Dog" "Nature" "Language" "I" "How are you"] languagesArray)))
+                                                              (sendRequests ["Hello" "Mother" "Father" "Hello, world!" "Cat" "Dog" "Nature" "Language" "I" "How are you" "English" "Tree" "Fire"] languagesArray)))
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
