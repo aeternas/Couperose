@@ -6,6 +6,16 @@ aliases:
       docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose:$CIRCLE_BRANCH . && \
       docker push aeternas/swadeshness-couperose:$CIRCLE_BRANCH
 
+  - &restore_cache
+    keys:
+      - v1-dependencies-{{ checksum "project.clj" }}
+      - v1-dependencies-
+  - &save_cache
+    paths:
+      - ~/.m2
+    key: v1-dependencies-{{ checksum "project.clj" }}
+
+
 version: 2
 jobs:
   build:
@@ -19,19 +29,11 @@ jobs:
     
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "project.clj" }}
-          - v1-dependencies-
+      - restore_cache: *restore_cache
 
       - run: lein deps
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "project.clj" }}
-        
+      - save_cache: *save_cache
       - run: lein test
       - run: lein uberjar 
       - store_artifacts:
