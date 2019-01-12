@@ -36,6 +36,7 @@ jobs:
       - save_cache: *save_cache
       - run: lein test
       - run: lein uberjar 
+      - run: if [ $CIRCLE_BRANCH == "master" ]; then echo 'export HOSTNAME="$PROD_HOSTNAME"' >> $BASH_ENV; else echo 'export HOSTNAME="$DEV_HOSTNAME"' >> $BASH_ENV; fi
       - store_artifacts:
           path: target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar
       - setup_remote_docker:
