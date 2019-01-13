@@ -19,6 +19,11 @@ aliases:
 version: 2
 jobs:
   build:
+    filters:
+      branches:
+        only:
+          - master
+          - development
     docker:
       - image: circleci/clojure:lein-2.7.1
     working_directory: ~/repo
