@@ -1,15 +1,15 @@
-# couperose
+# Couperose
 
 Cache warming solution for [SwadeshNess](https://github.com/aeternas/SwadeshNess) project.
 
 The relevant env should be injected:
 ```
-export HOSTNAME=vpered.su
+$ export HOSTNAME=vpered.su
 ```
 
 ## Usage
 
-    $ java -jar couperose-0.1.0-standalone.jar [args]
+    $ java -jar couperose-0.1.0-standalone.jar
 
 ## License
 
