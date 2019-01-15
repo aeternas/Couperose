@@ -1,6 +1,11 @@
 # couperose
 
-Cache warming solution for [SwadeshNess](https://github.com/aeternas/SwadeshNess) project
+Cache warming solution for [SwadeshNess](https://github.com/aeternas/SwadeshNess) project.
+
+The relevant env should be injected:
+```
+export HOSTNAME=vpered.su
+```
 
 ## Usage
 
