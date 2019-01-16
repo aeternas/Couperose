@@ -47,3 +47,5 @@
   (testing "create full request query"
     (let [someLongPhrase "Do you remember love"]
       (is (= "?translate=Do you remember love&group=Turkic&group=Baltic" (translationParser/getQuery someLongPhrase twoLanguageGroups))))))
+
+(deftest TranslationRequestTest)
