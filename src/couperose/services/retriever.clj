@@ -13,10 +13,15 @@
   (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))))
                 phrases)))
 
+(defn getPhrases
+  []
+  (with-open [rdr (clojure.java.io/reader "src/couperose/services/file")]
+    (reduce conj [] (line-seq rdr))))
+
 (defn retrieveGroups
   []
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests ["Hello" "Mother" "Father" "Hello, world!" "Cat" "Dog" "Nature" "Language" "I" "How are you" "English" "Tree" "Fire" "One" "Two" "Three"] languagesArray)))
+                                                              (sendRequests (getPhrases) languagesArray)))
             (fn [exception] (println "exception message is: " (.getMessage exception)))))
