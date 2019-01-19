@@ -1,6 +1,7 @@
 (ns couperose.services.retriever
   (:require [clojure.data.json :as json]
             [clj-http.client :as client]
+            [clojure.java.io :as io]
             [couperose.parsers.translation :as translationParser]
             [couperose.parsers.language :as languageParser]))
 
@@ -15,7 +16,7 @@
 
 (defn getPhrases
   []
-  (with-open [rdr (clojure.java.io/reader "src/couperose/services/file")]
+  (with-open [rdr (clojure.java.io/reader (io/resource "file.txt"))]
     (reduce conj [] (line-seq rdr))))
 
 (defn retrieveGroups

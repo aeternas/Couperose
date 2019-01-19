@@ -14,7 +14,10 @@ aliases:
     paths:
       - ~/.m2
     key: v1-dependencies-{{ checksum "project.clj" }}
-
+  - &run
+    name: Warm Cache
+    command: |
+      java -jar couperose-0.1.0-SNAPSHOT-standalone.jar
 
 version: 2
 jobs:
@@ -47,3 +50,32 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - deploy: *containerize_push
+  run:
+    filters:
+      branches:
+        only:
+          - master
+          - development
+    docker:
+      - image: aeternas/swadeshness-couperose:$CIRCLE_BRANCH
+    working_directory: /home/circleci/repo
+    steps:
+      - deploy: *run
+workflows:
+  version: 2
+  build-run:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - development
+      - run:
+          filters:
+            branches:
+              only:
+                - master
+                - development
+          requires:
+            - build
