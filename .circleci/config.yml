@@ -76,5 +76,6 @@ workflows:
             branches:
               only:
                 - master
+                - development
           requires:
             - build
