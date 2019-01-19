@@ -6,8 +6,8 @@
             [couperose.parsers.language :as languageParser]))
 
 (def hostname (System/getenv "HOSTNAME"))
-(def groupsUrl (str "https://" hostname "/v1/groups"))
 (def baseUrl (str "https://" hostname "/v1/"))
+(def groupsUrl (str baseUrl "groups"))
 
 (defn sendRequests
   [phrases languageGroups]
@@ -15,8 +15,8 @@
                 phrases)))
 
 (defn getPhrases
-  []
-  (with-open [rdr (clojure.java.io/reader (io/resource "file.txt"))]
+  [filename]
+  (with-open [rdr (clojure.java.io/reader (io/resource filename))]
     (reduce conj [] (line-seq rdr))))
 
 (defn retrieveGroups
@@ -24,5 +24,5 @@
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests (getPhrases) languagesArray)))
+                                                              (sendRequests (getPhrases "file.txt") languagesArray)))
             (fn [exception] (throw (Exception. (.getMessage exception))))))
