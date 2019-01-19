@@ -6,7 +6,7 @@
             [couperose.parsers.language :as languageParser]))
 
 (def hostname (System/getenv "HOSTNAME"))
-(def groupsUrl (str "https://" hostname "/v1/groupsz"))
+(def groupsUrl (str "https://" hostname "/v1/groups"))
 (def baseUrl (str "https://" hostname "/v1/"))
 
 (defn sendRequests
