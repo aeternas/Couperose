@@ -61,3 +61,21 @@ jobs:
     working_directory: /home/circleci/repo
     steps:
       - deploy: *run
+workflows:
+  version: 2
+  build-run:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - development
+      - run:
+          filters:
+            branches:
+              only:
+                - master
+                - development
+          requires:
+            - build
