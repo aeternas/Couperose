@@ -25,4 +25,4 @@
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
                                                               (sendRequests (getPhrases) languagesArray)))
-            (fn [exception] (println "exception message is: " (.getMessage exception)))))
+            (fn [exception] (throw (Exception. (.getMessage exception))))))
