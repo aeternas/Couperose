@@ -24,5 +24,5 @@
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests (getPhrases "file.txt") languagesArray)))
+                                                              (sendRequests (getPhrases "words.txt") languagesArray)))
             (fn [exception] (throw (Exception. (.getMessage exception))))))
