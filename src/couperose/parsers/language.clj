@@ -15,7 +15,7 @@
   [json]
   (dtos/make-language-group
     (:name json)
-    (into [] (map makeLanguage (:languages json)))))
+    (vec (map makeLanguage (:languages json)))))
 
 (defn parseLanguage
   [data]
@@ -23,7 +23,7 @@
 
 (defn parseLanguageArray
   [data]
-  (into [] (map makeLanguage (getJson data))))
+  (vec (map makeLanguage (getJson data))))
 
 (defn parseLanguageGroup
   [data]
@@ -31,4 +31,4 @@
 
 (defn parseLanguageGroupArray
   [data]
-  (into [] (map makeLanguageGroup (getJson data))))
+  (vec (map makeLanguageGroup (getJson data))))
