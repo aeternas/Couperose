@@ -14,7 +14,7 @@
   (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))))
                 phrases)))
 
-(defn getPhrases
+(defn getBaseLexems
   [filename]
   (with-open [rdr (clojure.java.io/reader (io/resource filename))]
     (reduce conj [] (line-seq rdr))))
@@ -24,5 +24,5 @@
   (client/get groupsUrl
             {:async? true}
             (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests (getPhrases "words.txt") languagesArray)))
+                                                              (sendRequests (getBaseLexems "words.txt") languagesArray)))
             (fn [exception] (throw (Exception. (.getMessage exception))))))
