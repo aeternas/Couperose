@@ -37,6 +37,7 @@ jobs:
     
     steps:
       - checkout
+      - run: git submodule init && git submodule update
       - restore_cache: *restore_cache
 
       - run: lein deps
