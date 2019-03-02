@@ -1,4 +1,9 @@
 aliases:
+  - &update_submodules
+    name: Update submodules
+    command: |
+      git submodule init && \
+      git submodule update
   - &containerize_push
     name: Containerize and Push
     command: |
@@ -37,7 +42,7 @@ jobs:
     
     steps:
       - checkout
-      - run: git submodule init && git submodule update
+      - run: *update_submodules
       - restore_cache: *restore_cache
 
       - run: lein deps
