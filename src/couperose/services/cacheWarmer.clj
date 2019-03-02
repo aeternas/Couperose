@@ -1,4 +1,4 @@
-(ns couperose.services.retriever
+(ns couperose.services.cacheWarmer
   (:require [clojure.data.json :as json]
             [clj-http.client :as client]
             [clojure.java.io :as io]
@@ -19,10 +19,11 @@
   (with-open [rdr (clojure.java.io/reader (io/resource filename))]
     (reduce conj [] (line-seq rdr))))
 
-(defn retrieveGroups
+(def groups
+  (future
+    (client/get groupsUrl)))
+
+(defn warmCache
   []
-  (client/get groupsUrl
-            {:async? true}
-            (fn [response] (let [languagesArray (languageParser/parseLanguageGroupArray (:body response))]
-                                                              (sendRequests (getBaseLexems "words.txt") languagesArray)))
-            (fn [exception] (throw (Exception. (.getMessage exception))))))
+  (let [languagesArray (languageParser/parseLanguageGroupArray (:body @groups))]
+    (sendRequests (getBaseLexems "words.txt") languagesArray)))
