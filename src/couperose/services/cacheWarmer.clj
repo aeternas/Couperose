@@ -26,4 +26,4 @@
 (defn warmCache
   []
   (let [languagesArray (languageParser/parseLanguageGroupArray (:body @groups))]
-    (sendRequests (getBaseLexems "words") languagesArray)))
+    (sendRequests (getBaseLexems "words/words") languagesArray)))
