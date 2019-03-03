@@ -1,4 +1,21 @@
 aliases:
+  - &install_dependencies
+    name: Install Dependencies
+    command: lein deps
+  - &run_tests
+    name: Run Unit Tests
+    command: lein test
+  - &make_executable
+    name: Make Jar Executable
+    command: lein uberjar
+  - &export_envs
+    name: Export ENVs
+    command: |
+      if [ $CIRCLE_BRANCH == "master" ]; then 
+        echo 'export HOSTNAME="$PROD_HOSTNAME"' >> $BASH_ENV
+      else 
+        echo 'export HOSTNAME="$DEV_HOSTNAME"' >> $BASH_ENV 
+      fi
   - &update_submodules
     name: Update submodules
     command: |
@@ -44,13 +61,11 @@ jobs:
       - checkout
       - run: *update_submodules
       - restore_cache: *restore_cache
-
-      - run: lein deps
-
+      - run: *install_dependencies
       - save_cache: *save_cache
-      - run: lein test
-      - run: lein uberjar 
-      - run: if [ $CIRCLE_BRANCH == "master" ]; then echo 'export HOSTNAME="$PROD_HOSTNAME"' >> $BASH_ENV; else echo 'export HOSTNAME="$DEV_HOSTNAME"' >> $BASH_ENV; fi
+      - run: *run_tests
+      - run: *make_executable 
+      - run: *export_envs
       - store_artifacts:
           path: target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar
       - setup_remote_docker:
