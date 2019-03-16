@@ -19,11 +19,8 @@
   (with-open [rdr (clojure.java.io/reader (io/resource filename))]
     (reduce conj [] (line-seq rdr))))
 
-(def groups
-  (future
-    (client/get groupsUrl)))
-
 (defn warmCache
   []
-  (let [languagesArray (languageParser/parseLanguageGroupArray (:body @groups))]
-    (sendRequests (getBaseLexems "words/words") languagesArray)))
+  (let [groups (future (client/get groupsUrl))]  
+    (let [languagesArray (languageParser/parseLanguageGroupArray (:body @groups))]
+      (sendRequests (getBaseLexems "words/words") languagesArray))))
