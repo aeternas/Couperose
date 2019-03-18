@@ -1,6 +1,5 @@
 (ns couperose.parsers.translation)
 
-
 (defn getLanguageGroupsQuery
   [languageGroups]
   (let [groupNames (map #(:name %) languageGroups)]
