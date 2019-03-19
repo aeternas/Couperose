@@ -1,11 +1,6 @@
-(ns couperose.core-test
+(ns couperose.services.cacheWarmer-test
   (:require [clojure.test :refer :all]
-            [clojure.data.json :as json]
-            [couperose.core :refer :all]
             [couperose.services.cacheWarmer :as warmer]
-            [couperose.parsers.language :as languageParser]
-            [couperose.parsers.translation :as translationParser]
-            [couperose.dto.dtos :as dtos]
             [clj-http.client :as c])
   (:use clj-http.fake))
 
