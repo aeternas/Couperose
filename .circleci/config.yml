@@ -21,6 +21,9 @@ aliases:
     command: |
       git submodule init && \
       git submodule update
+  - &setup_remote_docker
+    setup_remote_docker:
+      docker_layer_caching: true
   - &containerize_push
     name: Containerize and Push
     command: |
@@ -68,8 +71,7 @@ jobs:
       - run: *export_envs
       - store_artifacts:
           path: target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - *setup_remote_docker
       - deploy: *containerize_push
   run:
     filters:
