@@ -69,8 +69,6 @@ jobs:
       - run: *run_tests
       - run: *make_executable 
       - run: *export_envs
-      - store_artifacts:
-          path: target/uberjar/couperose-0.1.0-SNAPSHOT-standalone.jar
       - *setup_remote_docker
       - deploy: *containerize_push
   run:
