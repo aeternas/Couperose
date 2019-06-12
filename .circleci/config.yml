@@ -28,7 +28,7 @@ aliases:
     name: Containerize and Push
     command: |
       echo $DOCKER_PASSWORD > docker_passwd && \
-      docker login -u $DOCKER_USERNAME --password-stdin < docker_passwd rm docker_passwd && \
+      docker login -u $DOCKER_USERNAME --password-stdin < docker_passwd && rm docker_passwd && \
       docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose:$CIRCLE_BRANCH . && \
       docker push aeternas/swadeshness-couperose:$CIRCLE_BRANCH
 
