@@ -45,7 +45,7 @@ aliases:
     command: |
       java -jar couperose-0.1.0-SNAPSHOT-standalone.jar
 
-version: 2
+version: 2.1
 jobs:
   build:
     filters:
@@ -84,7 +84,7 @@ jobs:
     steps:
       - deploy: *run
 workflows:
-  version: 2
+  version: 2.1
   build-run:
     jobs:
       - build:
