@@ -31,7 +31,9 @@ aliases:
       docker login -u $DOCKER_USERNAME --password-stdin < docker_passwd && rm docker_passwd && \
       docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose:$CIRCLE_BRANCH . && \
       docker push aeternas/swadeshness-couperose:$CIRCLE_BRANCH
-
+      if [[ $CIRCLE_BRANCH == "master" ]]; then \
+                                      docker tag aeternas/swadeshness-couperose:master aeternas/swadeshness-couperose:latest && \
+                                      docker push aeternas/swadeshness-couperose:latest; fi
   - &restore_cache
     keys:
       - v1-dependencies-{{ checksum "project.clj" }}
