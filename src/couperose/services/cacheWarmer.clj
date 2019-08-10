@@ -11,7 +11,7 @@
 
 (defn sendRequests
   [phrases languageGroups]
-  (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))  {:throw-exceptions false}))
+  (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))))
                 phrases)))
 
 (defn getBaseLexems
