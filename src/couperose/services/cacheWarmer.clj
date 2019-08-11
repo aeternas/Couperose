@@ -9,10 +9,15 @@
 (def baseUrl (str "https://" hostname "/v1/"))
 (def groupsUrl (str baseUrl "groups"))
 
+(defn translatePhraseLanguageGroups
+  [phrase languageGroups]
+  (let [groupPhraseTranslationQuery (translationParser/getQuery phrase languageGroups)]
+    (let [groupPhraseTranslationUrl (str baseUrl groupPhraseTranslationQuery)]
+      (client/get groupPhraseTranslationUrl))))
+
 (defn sendRequests
   [phrases languageGroups]
-  (println (map (fn [phrase] (client/get (str baseUrl (translationParser/getQuery phrase languageGroups))))
-                phrases)))
+      (println (map (fn [phrase] (translatePhraseLanguageGroups phrase languageGroups)) phrases)))
 
 (defn getBaseLexems
   [filename]
