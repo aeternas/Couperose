@@ -17,7 +17,7 @@
 
 (defn sendRequests
   [phrases languageGroups]
-      (println (map #(translatePhraseLanguageGroups languageGroups) phrases)))
+      (println (map (fn [phrase] (translatePhraseLanguageGroups phrase languageGroups)) phrases)))
 
 (defn getBaseLexems
   [filename]
