@@ -38,8 +38,9 @@ aliases:
       docker build --build-arg SW_HOSTNAME=$HOSTNAME -t aeternas/swadeshness-couperose:$CIRCLE_BRANCH . && \
       docker push aeternas/swadeshness-couperose:$CIRCLE_BRANCH
       if [[ $CIRCLE_BRANCH == "master" ]]; then \
-                                      docker tag aeternas/swadeshness-couperose:master aeternas/swadeshness-couperose:latest && \
-                                      docker push aeternas/swadeshness-couperose:latest; fi
+        docker tag aeternas/swadeshness-couperose:master aeternas/swadeshness-couperose:latest && \
+        docker push aeternas/swadeshness-couperose:latest
+      fi
   - &restore_cache
     keys:
       - v1-dependencies-{{ checksum "project.clj" }}
@@ -52,18 +53,15 @@ aliases:
     name: Warm Cache
     command: |
       java -jar couperose-0.1.0-SNAPSHOT-standalone.jar
-
 version: 2.1
 jobs:
   build:
     docker:
       - image: circleci/clojure:lein-2.7.1
     working_directory: ~/repo
-
     environment:
       LEIN_ROOT: "true"
       JVM_OPTS: -Xmx3200m
-    
     steps:
       - run: *git_checkout
       - run: *update_submodules
