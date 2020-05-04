@@ -56,6 +56,7 @@ aliases:
   - &run_warm_cache
     name: Warm Cache
     command: |
+      cat /etc/passwd | grep circleci && \
       whoami && pwd && \  
       java -jar couperose-0.1.0-SNAPSHOT-standalone.jar
 version: 2.1
