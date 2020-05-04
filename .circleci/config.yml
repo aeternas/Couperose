@@ -77,7 +77,6 @@ jobs:
   run:
     docker:
       - image: aeternas/swadeshness-couperose:$CIRCLE_BRANCH
-    working_directory: /home/circleci/repo
     steps:
       - run: cat /etc/passwd
       - deploy: *run_warm_cache
