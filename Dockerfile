@@ -1,4 +1,4 @@
-FROM openjdk:12-alpine
+FROM openjdk:13-alpine
 ARG SW_HOSTNAME
 ENV HOSTNAME $SW_HOSTNAME
 WORKDIR /home/circleci/repo/
