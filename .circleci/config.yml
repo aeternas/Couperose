@@ -89,7 +89,9 @@ workflows:
     jobs:
       - build:
           filters:
+            -
       - run:
           filters:
+            -
           requires:
             - build
