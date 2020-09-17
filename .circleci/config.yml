@@ -89,15 +89,7 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              only:
-                - master
-                - development
       - run:
           filters:
-            branches:
-              only:
-                - master
-                - development
           requires:
             - build
