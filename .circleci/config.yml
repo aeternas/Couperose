@@ -60,7 +60,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.9.3
     working_directory: ~/repo
     environment: *environment
     steps:
