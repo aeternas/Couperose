@@ -88,10 +88,6 @@ workflows:
   build-run:
     jobs:
       - build:
-          filters:
-            -
       - run:
-          filters:
-            -
           requires:
             - build
