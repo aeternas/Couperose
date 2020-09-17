@@ -87,7 +87,7 @@ workflows:
   version: 2.1
   build-run:
     jobs:
-      - build:
+      - build
       - run:
           requires:
             - build
